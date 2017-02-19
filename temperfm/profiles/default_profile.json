@@ -1,0 +1,171 @@
+[
+  {
+    "name": "passionate",
+    "preferred_color": [0.66, 0.21, 0.40],
+    "descriptions": [
+      "passionate",
+      "rousing",
+      "confident",
+      "boisterous",
+      "rowdy"
+    ],
+    "tags": [
+      "jazz",
+      "rock",
+      "bebop",
+      "classical",
+      "soul",
+      "club",
+      "gospel",
+      "dance",
+      "party",
+      "pop",
+      "epic",
+      "energy",
+      "rap",
+      "gospel",
+      "punk",
+      "hip hop",
+      "jungle",
+      "rnb"
+    ]
+  },
+  {
+    "name": "cheerful",
+    "preferred_color": [0.6, 0.65, 0.21],
+    "descriptions": [
+      "rollicking",
+      "cheerful",
+      "fun",
+      "sweet",
+      "amiable",
+      "good natured"
+    ],
+    "tags": [
+      "anthem",
+      "big band",
+      "bluegrass",
+      "country",
+      "classical",
+      "soil",
+      "dance",
+      "party",
+      "pop",
+      "house",
+      "disco",
+      "folk",
+      "funk",
+      "groove",
+      "reggae",
+      "shoegaze",
+      "ska",
+      "smooth",
+      "symphonic"
+    ]
+  },
+    {
+    "name": "whimsical",
+    "preferred_color": [0.66, 0.38, 0.21],
+    "descriptions": [
+      "humorous",
+      "silly",
+      "campy",
+      "quirky",
+      "whimsical",
+      "witty",
+      "wry"
+    ],
+    "tags": [
+      "jazz",
+      "avante garde",
+      "breakcore",
+      "cheerful",
+      "pop",
+      "house",
+      "dream",
+      "eclectic",
+      "folk",
+      "funk",
+      "rap",
+      "groove",
+      "happy",
+      "comedy",
+      "humor",
+      "mathcore",
+      "jungle",
+      "psychedelic",
+      "ska",
+      "surf"
+    ]
+  },
+  {
+    "name": "poignant",
+    "preferred_color": [0.21, 0.43, 0.66],
+    "descriptions": [
+      "literate",
+      "poignant",
+      "wistful",
+      "bittersweet",
+      "autumnal",
+      "brooding"
+    ],
+    "tags": [
+      "ambient",
+      "atmosphere",
+      "atmospheric",
+      "black",
+      "metal",
+      "blues",
+      "calm",
+      "chill",
+      "country",
+      "dark",
+      "death",
+      "doom",
+      "emo",
+      "emotional",
+      "ethereal",
+      "gothic",
+      "grunge",
+      "punk",
+      "lounge",
+      "mellow",
+      "trance",
+      "psychedelic",
+      "reggae",
+      "screamo",
+      "shoegaze",
+      "sludge"
+    ]
+  },
+  {
+    "name": "aggressive",
+    "preferred_color": [0.66, 0.21, 0.21],
+    "descriptions": [
+      "aggressive",
+      "fiery",
+      "tense",
+      "anxious",
+      "intense",
+      "volatile",
+      "visceral"
+    ],
+    "tags": [
+      "acid",
+      "aggressive",
+      "angry",
+      "metal",
+      "brutal",
+      "breakcore",
+      "dubstep",
+      "industrial",
+      "grindcore",
+      "punk",
+      "mathcore",
+      "noise",
+      "screamo",
+      "ska",
+      "thash"
+    ]
+  }
+]
