@@ -42,7 +42,8 @@ def main():
             report = get_user_weekly_artists(args['<username>'], **kwargs)
             print(report.to_json())
     except RuntimeError as e:
-        sys.stderr.write(str(e))
+        sys.stderr.write(f'{e}\n')
+        exit(1)
 
 
 if __name__ == '__main__':
