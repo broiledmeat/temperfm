@@ -22,16 +22,15 @@ sys.path.remove(os.path.dirname(__file__))
 
 def main():
     from docopt import docopt
-    from temperfm import __version__, config
+    import temperfm
+    from temperfm.config import DEFAULT_CONFIG_PATH
 
-    args = docopt(__doc__, version=f'TemperFM {__version__}')
+    args = docopt(__doc__, version=f'TemperFM {temperfm.__version__}')
 
     try:
-        config.load(args['--config'])
+        temperfm.load_config(args['--config'] or DEFAULT_CONFIG_PATH)
 
         if args['weekly']:
-            from temperfm import get_user_weekly_artists
-
             kwargs = {}
 
             try:
@@ -39,7 +38,7 @@ def main():
             except (TypeError, ValueError):
                 pass
 
-            report = get_user_weekly_artists(args['<username>'], **kwargs)
+            report = temperfm.get_user_weekly_artists(args['<username>'], **kwargs)
             print(report.to_json())
     except RuntimeError as e:
         sys.stderr.write(f'{e}\n')

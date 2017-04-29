@@ -1,21 +1,21 @@
 import time
 import datetime
 import json
-from temperfm.records.base import RecordBase
+from .base import RecordBase
 
 
 class UserWeeklyArtistReport(RecordBase):
-    def __init__(self, name, profile, start_date, end_date, artists, scores):
+    def __init__(self, name, clusters, start_date, end_date, artists, scores):
         """
         :type name: str
-        :type profile: temperfm.profiles.Profile
+        :type clusters: list[temperfm.profile.Cluster]
         :type start_date: datetime.date
         :type end_date: datetime.date
         :type artists: list[list[temperfm.records.ArtistPlays]]
         :type scores: set[temperfm.records.ArtistProfileScores]
         """
         self.name = name
-        self.profile = profile
+        self.clusters = clusters
         self.start_date = start_date
         self.end_date = end_date
         self.artist_weekly = artists
@@ -26,7 +26,7 @@ class UserWeeklyArtistReport(RecordBase):
             'username': self.name,
             'start_date': int(time.mktime(self.start_date.timetuple())),
             'end_time': int(time.mktime(self.end_date.timetuple())),
-            'clusters': [cluster.name for cluster in self.profile.clusters],
+            'clusters': [cluster.name for cluster in self.clusters],
             'artists': {
                 'scores': {artist.name: artist.scores for artist in self.artist_profile_scores},
                 'weekly': [
@@ -39,6 +39,6 @@ class UserWeeklyArtistReport(RecordBase):
         })
 
     def __repr__(self):
-        cluster_names = [cluster.name for cluster in self.profile.clusters]
+        cluster_names = [cluster.name for cluster in self.clusters]
         return f'<UserWeeklySpanArtistReport: {self.name}, {self.start_date}, {self.end_date}, {cluster_names},' \
                f'{self.artist_profile_scores}'

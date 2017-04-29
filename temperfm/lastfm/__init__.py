@@ -8,7 +8,7 @@ def query(**kwargs):
     """
     :rtype: dict[str, Any]
     """
-    from temperfm import config, log
+    from .. import config, log
 
     for key, value in kwargs.items():
         if key.endswith('_'):
@@ -37,7 +37,7 @@ def get_user_top_recent_artists(name, period='1month', limit=16):
     :type limit: int
     :rtype: list[ArtistPlays]
     """
-    from temperfm.records import ArtistPlays
+    from ..records import ArtistPlays
 
     artists = []
     results = query(method='user.gettopartists', user=name, period=period, limit=limit)
@@ -53,8 +53,8 @@ def get_user_time_span_artists(name, start_date, end_date=None):
     :type end_date: datetime.date | None
     :rtype: list[ArtistPlays]
     """
-    from temperfm.lastfm import cache
-    from temperfm.records import ArtistPlays
+    from . import cache
+    from ..records import ArtistPlays
 
     if end_date is None:
         end_date = start_date + datetime.timedelta(days=6)
@@ -86,7 +86,7 @@ def get_artist_tags(name):
     :type name: str
     :rtype: set[str]
     """
-    from temperfm.lastfm import cache
+    from . import cache
 
     tags = cache.get_artist_tags(name)
     if tags is not None:

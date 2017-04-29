@@ -1,23 +1,21 @@
-import os
 import json
 
 
-DEFAULT_PROFILE_PATH = os.path.join(os.path.dirname(__file__), 'default_profile.json')
+clusters = []
+""":type: list[Cluster]"""
 
 
-class Profile:
-    def __init__(self, path):
-        """
-        :type path: str
-        """
-        self.clusters = []
-        """:type: list[Cluster]"""
+def load(path):
+    """
+    :rtype: Profile
+    """
+    clusters.clear()
 
-        for cluster in json.load(open(path)):
-            color = cluster.get('preferred_color', None)
-            if color is not None:
-                color = tuple(color)
-            self.clusters.append(Cluster(cluster['name'], set(cluster['tags']), color))
+    for cluster in json.load(open(path)):
+        color = cluster.get('preferred_color', None)
+        if color is not None:
+            color = tuple(color)
+        clusters.append(Cluster(cluster['name'], set(cluster['tags']), color))
 
 
 class Cluster:
@@ -40,3 +38,6 @@ class Cluster:
             from random import random
             self._preferred_color = random(), random(), random()
         return self._preferred_color
+
+    def __repr__(self):
+        return f'<Cluster: {self.name}>'

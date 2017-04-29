@@ -1,21 +1,37 @@
 import datetime
-from temperfm.profiles import default_profile
+from .config import load as load_config
 
 
 __version__ = '0.2'
 
 
-def get_user_weekly_artists(username, limit=8, profile=default_profile):
+def _get_tags_scores(tags):
+    """
+    :type tags: set[str]
+    :rtype: list[float]
+    """
+    from temperfm import profile
+
+    scores = [0] * len(profile.clusters)
+
+    for tag in tags:
+        for part in tag.split():
+            for i, cluster in enumerate(profile.clusters):
+                if part in cluster.tags:
+                    scores[i] += 1
+
+    return scores
+
+
+def get_user_weekly_artists(username, limit=8):
     """
     :type username: str
     :type limit: int
-    :type profile: temperfm.profiles.Profile
     :rtype: UserWeeklyArtistReport
     """
-    from temperfm import log
+    from temperfm import profile, log
+    from temperfm.lastfm import get_artist_tags, get_user_time_span_artists
     from temperfm.records import ArtistProfileScores, UserWeeklyArtistReport
-    from temperfm.profiles import get_tags_scores
-    from temperfm.lastfm import get_user_time_span_artists, get_artist_tags
 
     limit = max(1, limit)
     end_date = datetime.datetime.utcnow().date()
@@ -34,10 +50,10 @@ def get_user_weekly_artists(username, limit=8, profile=default_profile):
         artists.append(get_user_time_span_artists(username, week_start_date, week_end_date))
 
     for artist_name in set([artist.name for artists_ in artists for artist in artists_]):
-        artist_scores = get_tags_scores(get_artist_tags(artist_name), profile=profile)
+        artist_scores = _get_tags_scores(get_artist_tags(artist_name))
         scores.add(ArtistProfileScores(artist_name, artist_scores))
 
     end_time = datetime.datetime.now()
     log.info(f'Finished UserWeeklyArtistReport in {end_time - start_time}')
 
-    return UserWeeklyArtistReport(username, profile, start_date, end_date, artists, scores)
+    return UserWeeklyArtistReport(username, profile.clusters, start_date, end_date, artists, scores)

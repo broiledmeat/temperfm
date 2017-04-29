@@ -12,7 +12,8 @@ def _get_cursor():
     global _connection, _cursor
 
     if _connection is None:
-        from temperfm import config
+        from .. import config
+
         _connection = sqlite3.connect(config.cache_path, isolation_level=None)
 
     if _cursor is None:
@@ -36,7 +37,7 @@ def _get_cursor():
 
 def _to_csv(values):
     """
-    :type values: list[str]
+    :type values: typing.Iterable[str]
     :rtype: str
     """
     buffer = io.StringIO()
@@ -65,7 +66,7 @@ def get_user_time_span_artists(name, start_date, end_date):
     :type end_date: datetime.date
     :rtype: list[temperfm.records.ArtistPlays]
     """
-    from temperfm.records import ArtistPlays
+    from ..records import ArtistPlays
 
     cursor = _get_cursor()
     results = cursor.execute('SELECT rowid, artists FROM user_time_span_artists WHERE name = ? AND '

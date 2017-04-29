@@ -1,3 +1,3 @@
-from temperfm.records.artist_plays import ArtistPlays
-from temperfm.records.artist_profile_scores import ArtistProfileScores
-from temperfm.records.user_weekly_artist_report import UserWeeklyArtistReport
+from .artist_plays import ArtistPlays
+from .artist_profile_scores import ArtistProfileScores
+from .user_weekly_artist_report import UserWeeklyArtistReport

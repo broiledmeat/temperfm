@@ -1,4 +1,4 @@
-from temperfm.records.base import RecordBase
+from .base import RecordBase
 
 
 class ArtistPlays(RecordBase):
