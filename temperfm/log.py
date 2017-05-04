@@ -13,7 +13,7 @@ def _get_logger():
 
     if _logger is None:
         from logging.handlers import RotatingFileHandler
-        from temperfm.config import log_path
+        from .config import log_path
 
         _logger = logging.getLogger('temperfm')
         formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')

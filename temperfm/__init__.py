@@ -11,7 +11,7 @@ def _get_tags_scores(tags):
     :type tags: set[str]
     :rtype: list[int]
     """
-    from temperfm import profile
+    from . import profile
 
     scores = [0] * len(profile.clusters)
 
@@ -30,9 +30,9 @@ def get_user_weekly_artists(username, limit=8):
     :type limit: int
     :rtype: UserWeeklyArtistReport
     """
-    from temperfm import profile, log
-    from temperfm.lastfm import get_artist_tags, get_user_time_span_artists
-    from temperfm.records import ArtistProfileScores, UserWeeklyArtistReport
+    from . import profile, log
+    from .lastfm import get_artist_tags, get_user_time_span_artists
+    from .records import ArtistProfileScores, UserWeeklyArtistReport
 
     limit = max(1, limit)
     end_date = datetime.datetime.utcnow().date()
