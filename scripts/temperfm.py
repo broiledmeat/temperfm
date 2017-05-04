@@ -23,12 +23,11 @@ sys.path.remove(os.path.dirname(__file__))
 def main():
     from docopt import docopt
     import temperfm
-    from temperfm.config import DEFAULT_CONFIG_PATH
 
     args = docopt(__doc__, version=f'TemperFM {temperfm.__version__}')
 
     try:
-        temperfm.load_config(args['--config'] or DEFAULT_CONFIG_PATH)
+        temperfm.load_config(args['--config'] or temperfm.DEFAULT_CONFIG_PATH)
 
         if args['weekly']:
             kwargs = {}

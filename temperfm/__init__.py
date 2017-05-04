@@ -1,5 +1,6 @@
 import datetime
-from .config import load as load_config
+# noinspection PyUnresolvedReferences
+from .config import DEFAULT_CONFIG_PATH, load as load_config
 
 
 __version__ = '0.2'
@@ -8,7 +9,7 @@ __version__ = '0.2'
 def _get_tags_scores(tags):
     """
     :type tags: set[str]
-    :rtype: list[float]
+    :rtype: list[int]
     """
     from temperfm import profile
 
