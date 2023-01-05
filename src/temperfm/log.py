@@ -1,62 +1,39 @@
+import os
 import logging
 
 
-_logger = None
-""":type: logging.Logger | None"""
-
-
-def _get_logger():
-    """
-    :rtype: logging.Logger
-    """
-    global _logger
-
-    if _logger is None:
+class Logger:
+    def __init__(self, path: str):
         from logging.handlers import RotatingFileHandler
-        from .config import log_path
 
-        _logger = logging.getLogger('temperfm')
+        root = os.path.dirname(path)
+        if not os.path.isdir(root):
+            os.makedirs(root)
+
+        self._logger = logging.getLogger('temperfm')
+        self._logger.setLevel(logging.DEBUG)
+
         formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
-        handler = RotatingFileHandler(log_path, 'a', 5 * 1024 * 1024, 5)
 
-        handler.setFormatter(formatter)
-        _logger.addHandler(handler)
-        _logger.setLevel(logging.DEBUG)
+        console_handler = logging.StreamHandler()
+        console_handler.setFormatter(formatter)
+        self._logger.addHandler(console_handler)
 
-    return _logger
+        file_handler = RotatingFileHandler(path, 'a', 5 * 1024 * 1024, 5)
+        file_handler.setFormatter(formatter)
+        self._logger.addHandler(file_handler)
 
+    def log(self, level: int, message: str):
+        self._logger.log(level, message)
 
-def log(level, message):
-    """
-    :type level: int
-    :type message: str
-    """
-    _get_logger().log(level, message)
+    def info(self, message: str):
+        self.log(logging.INFO, message)
 
+    def debug(self, message: str):
+        self.log(logging.DEBUG, message)
 
-def info(message):
-    """
-    :type message: str
-    """
-    log(logging.INFO, message)
+    def warning(self, message: str):
+        self.log(logging.WARNING, message)
 
-
-def debug(message):
-    """
-    :type message: str
-    """
-    log(logging.DEBUG, message)
-
-
-def warning(message):
-    """
-    :type message: str
-    """
-    log(logging.WARNING, message)
-
-
-def error(message):
-    """
-    :type message: str
-    """
-    log(logging.ERROR, message)
+    def error(self, message: str):
+        self.log(logging.ERROR, message)
